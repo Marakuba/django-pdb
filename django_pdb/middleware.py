@@ -8,7 +8,7 @@ import sys
 from django.conf import settings
 from django.core.exceptions import MiddlewareNotUsed
 
-from django_pdb.utils import get_ipdb, has_ipdb
+from django_pdb.utils import get_ipdb, has_ipdb, has_pudb, get_pudb
 
 
 try:
@@ -50,6 +50,8 @@ class PdbMiddleware(parent):
             type_pdb = 'pdb'
         elif request.GET.get('ipdb', None) is not None:
             type_pdb = 'ipdb'
+        elif request.GET.get('pudb', None) is not None:
+            type_pdb = 'pudb'
         return type_pdb
 
     def process_view(self, request, view_func, view_args, view_kwargs):
@@ -81,6 +83,8 @@ class PdbMiddleware(parent):
 
         if type_pdb == 'ipdb' and has_ipdb():
             p = get_ipdb()
+        elif type_pdb == 'pudb' and has_pudb():
+            p = get_pudb()
         else:
             if not type_pdb == 'pdb':
                 print('You do not install ipdb or ipython module')

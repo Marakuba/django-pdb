@@ -36,7 +36,7 @@ For Django after 1.7 it needs to be added BEFORE them.
 
     # Make sure to add PdbMiddleware after all other middleware.
     # PdbMiddleware only activates when settings.DEBUG is True.
-    MIDDLEWARE_CLASSES = (
+    MIDDLEWARE = (
         ...
         'django_pdb.middleware.PdbMiddleware',
     )
@@ -50,13 +50,15 @@ Drops into pdb at the start of a view if the URL includes a `pdb` GET parameter.
 
 Drops into ipdb at the start of a view if the URL includes a `ipdb` GET parameter.
 
+Drops into pudb at the start of a view if the URL includes a `pudb` GET parameter.
+
 This behavior is only enabled if ``settings.DEBUG = True``::
 
     bash: testproject/manage.py runserver
     Validating models...
 
     0 errors found
-    Django version 1.3, using settings 'testproject.settings'
+    Django version 2.0.3, using settings 'testproject.settings'
     Development server is running at http://127.0.0.1:8000/
     Quit the server with CONTROL-C.
 
@@ -77,7 +79,7 @@ Drops into pdb/ipdb at the start of every view::
     Validating models...
 
     0 errors found
-    Django version 1.3, using settings 'testproject.settings'
+    Django version 2.0.3, using settings 'testproject.settings'
     Development server is running at http://127.0.0.1:8000/
     Quit the server with CONTROL-C.
 
@@ -163,3 +165,8 @@ framework.
 
 Make sure to put ``django_pdb`` **after** any conflicting apps in
 ``INSTALLED_APPS`` so that they have priority.
+
+
+About PuDB
+----------
+`Отладка Python/Django при помощи PuDB <https://adw0rd.com/2012/3/24/python-django-pudb/>`_
